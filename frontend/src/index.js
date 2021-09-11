@@ -3,11 +3,27 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import "./fonts/fonts.css";
 import reportWebVitals from "./reportWebVitals";
+
 import LoginSignUp from "./pages/LoginSignUp";
+import Hangout from "./pages/Hangout";
+import FriendsList from "./pages/FriendsList";
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <LoginSignUp />
+    <Router>
+      <Switch>
+        <Route exact path="/" component={LoginSignUp} />
+        <Route path="/hangout" component={Hangout} />
+        <Route path="/friends-list" component={FriendsList} />
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
