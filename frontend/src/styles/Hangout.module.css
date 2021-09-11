@@ -13,14 +13,47 @@
   margin: 0 auto 0 auto;
 }
 
-#sidebar {
+.sidebar {
   position: absolute;
 
-  left: 0;
+  left: -250px;
   top: 0;
 
   height: 100%;
   width: 250px;
+
+  box-shadow: 0 8px 13px 6px rgb(0 0 0 / 9%);
+
+  background-color: #fff;
+
+  transition: 0.5s ease;
+
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.sidebarOpen {
+  left: 0;
+  transition: 0.75s ease;
+}
+
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+#friendsButton {
+  border: none;
+  background: #484;
+  color: #fff;
+  padding: 30px;
+}
+
+#canvasDiv {
+  width: 100%;
 
   box-shadow: 0 8px 13px 6px rgb(0 0 0 / 9%);
 }
