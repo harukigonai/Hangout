@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "../styles/Hangout.module.css";
-import Button from "../components/Button";
 import classNames from "classnames";
 
-import Canvas from "../components/Canvas";
+import Messaging from "../components/Messaging";
+import Scrollbars from "react-custom-scrollbars";
 
 export default function Hangout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -26,24 +26,67 @@ export default function Hangout() {
     };
   });
 
+  const [hideSidebar, setHideSidebar] = useState(true);
+  const toggleHideSidebar = () => setHideSidebar(!hideSidebar);
+
+  const conversation = (name, preview, lastMessageTime) => (
+    <div className={styles.conversation}>
+      <div className={styles.conversationProfilePic}></div>
+      <div className={styles.conversationNameTimePreviewDiv}>
+        <div className={styles.conversationNameTimeDiv}>
+          <h3 className={styles.conversationName}>{name}</h3>
+          <p className={styles.conversationTime}>{lastMessageTime}</p>
+        </div>
+        <div className={styles.conversationPreviewDiv}>
+          <p className={styles.conversationPreview}>{preview}</p>
+        </div>
+      </div>
+    </div>
+  );
+
+  const [messagingName, setMessagingName] = useState("Adam");
+
   return (
     <div id={styles.hangout}>
-      <div id={styles.hangoutPage}>
-        <div id={styles.header}>
-          <h1>Hangout</h1>
-          <Button ref={buttonRef} text="Friends List" onClick={toggleSidebar} />
-        </div>
-
-        <Canvas />
-      </div>
-
       <div
-        ref={sidebarRef}
         className={classNames(styles.sidebar, {
-          [styles.sidebarOpen]: sidebarOpen,
+          [styles.sidebarHidden]: hideSidebar,
         })}
       >
-        <h2>Friends List</h2>
+        <h2 id={styles.sidebarHeader}>Hangouts</h2>
+        <div id={styles.scrollbarDiv}>
+          <Scrollbars>
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            {conversation("Haruki", "Hangout webapp", "2 min ago")}
+            <div id={styles.conversationListBottomDiv} />
+          </Scrollbars>
+        </div>
+      </div>
+      <div
+        className={classNames(styles.content, {
+          [styles.contentMax]: !hideSidebar,
+        })}
+      >
+        <Messaging
+          buttonRef={buttonRef}
+          messagingName={messagingName}
+          toggleHideSidebar={toggleHideSidebar}
+        />
       </div>
     </div>
   );
